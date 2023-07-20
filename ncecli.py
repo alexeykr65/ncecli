@@ -55,10 +55,9 @@ def host_links(filter):
 
 @main.command("lports", help="Query Logical Ports by Switch Name")
 @click.option("-n", "--name", required=True, help="Filter by Logical Switch Name")
-@click.option("-f", "--filter", default="", help="Filter by Switch Name(don't work)")
 @click.option("-s", "--status", default="", help="Filter by Status Ports(up, down)")
-def lports(name, filter, status):
-    nc.ports_print(flt=filter, sw=name, status=status)
+def lports(name, status):
+    nc.ports_print(sw=name, status=status)
 
 
 @main.command("lports_all", help="Query All Logical Ports (slow)")
