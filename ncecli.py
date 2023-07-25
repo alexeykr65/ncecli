@@ -118,7 +118,7 @@ def vm(filter):
 @main.command("cmd", help="Run command on Huawei switches ")
 @click.option("-c", "--cmd", required=True, help="Command to run")
 @click.option("-s", "--switch", default="", help="Name of Switches(comma separated)")
-@click.option("-g", "--group", default="", help="Group of Switches")
+@click.option("-g", "--group", default="all", help="Group of Switches")
 @click.option("-f", "--filter", default="", help="Filter output")
 def cmd(cmd, switch, group, filter):
     nc.run_cmd(sw=switch, gr=group, cmd=cmd, user=username, pwd=pwd, filter=filter)
