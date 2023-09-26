@@ -115,6 +115,13 @@ def scapp(net):
 def vm(filter):
     nc.get_host_tp(hst=filter, user=username, pwd=pwd)
 
+@main.command("mac", help="Query mac or ip address from switches")
+@click.option("-m", "--mac", required=True, help="MAC address or ip address")
+@click.option("-f", "--fabric", required=False, default="nce", help="Name of Fabric(srt or krv)")
+@click.option("-v", "--verbose", is_flag=True, help="Show verbose with pevlan and cevlan")
+def mac(fabric, mac, verbose):
+    nc.get_mac_addresses(fabric=fabric, mac=mac, user=username, pwd=pwd, flag_verbose=verbose)
+
 @main.command("cmd", help="Run command on Huawei switches ")
 @click.option("-c", "--cmd", required=True, help="Command to run")
 @click.option("-s", "--switch", default="", help="Name of Switches(comma separated)")
@@ -123,6 +130,10 @@ def vm(filter):
 def cmd(cmd, switch, group, filter):
     nc.run_cmd(sw=switch, gr=group, cmd=cmd, user=username, pwd=pwd, filter=filter)
 
+@main.command("tpol_global", help="Query Traffic Policy of Global")
+@click.option("-s", "--switch", help="Name of Switche")
+def tpol_global(switch):
+    nc.tpol_global(hst=switch, user=username, pwd=pwd)
 
 def get_cfg(fl):
     cfg_file = Path(Path.home(), f'inventory/{fl}')
